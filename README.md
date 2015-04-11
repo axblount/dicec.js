@@ -1,7 +1,7 @@
 dicec.js
 --------
 
-Dice combinators for javascript, [MIT Licensed](https://github.com/axblount/dicec/blob/master/LICENSE).
+Dice combinators for javascript, [Apache License 2.0](https://github.com/axblount/dicec/blob/master/LICENSE).
 
 [dicec.js](https://github.com/axblount/dicec.js/blob/master/dicec.litcoffee) is written in Literate Coffeescript so you might as well read the file.
 

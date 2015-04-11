@@ -3,9 +3,52 @@ dicec.js
 
 Dice combinators for javascript.
 
-Distributed under the terms of the [MIT License](https://github.com/axblount/dicec/blob/master/LICENSE).
+Distributed under the terms of the [Apache License 2.0](https://github.com/axblount/dicec/blob/master/LICENSE).
+
+>  Copyright 2015 Alex Blount
+
+>  Licensed under the Apache License, Version 2.0 (the "License");
+>  you may not use this file except in compliance with the License.
+>  You may obtain a copy of the License at
+
+>      http://www.apache.org/licenses/LICENSE-2.0
+
+>  Unless required by applicable law or agreed to in writing, software
+>  distributed under the License is distributed on an "AS IS" BASIS,
+>  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+>  See the License for the specific language governing permissions and
+>  limitations under the License.
 
     global = this
+
+Utilites
+--------
+
+Helper functions to make sorting easier.
+
+    sortAsc = (a, b) -> +a - +b
+
+    sortDesc = (a, b) -> +b - +a
+
+Predicates.
+
+    isNumber = (n) -> typeof n is 'number'
+
+    isString = (s) -> typeof s is 'string'
+
+    isFunction = (f) -> typeof f is 'function'
+
+    isArray = (a) -> a instanceof Array
+
+`val` is used to get the 'value' of an object, whatever it may be.
+
+    val = (obj) ->
+        if isFunction(obj)
+            return obj()
+        else if obj instanceof Die
+            return obj.roll()
+        else
+            return obj
 
 Die
 ===
@@ -13,11 +56,11 @@ Die
 `Die` does everything.
 
 You have three options when constructing a `Die`.
-Passing in a positive integer will create a die that generates integers on [1, n].
-Passing in an array will create a die that picks elements from the array uniformly.
-When passed a function, the die will use that function as its `roll`.
+* Passing in a positive integer will create a die that generates integers in [1, n].
+* Passing in an array will create a die that picks elements from the array uniformly.
+* When passed a function, the die will use that function as its `roll`.
 
-All die methods return a new `Die` object, leaving the original die unchanged.
+All die methods return a new `Die` object, leaving the original unchanged.
 
 To roll a die, just call `roll`.
 
@@ -105,7 +148,7 @@ Two common reductions.
 
         sum: ->
             @reduce (a, b) -> a + b
-        
+
         product: ->
             @reduce (a, b) -> a * b
 
@@ -189,38 +232,19 @@ D6 System.
 Export
 ------
 
-    global = this
+Export for CommonJS.
 
     if typeof(exports) != 'undefined'
         exports.d = d
 
+Export to global scope.
+
     global.d = d
 
-Utilites
+Examples
 --------
 
-Helper functions to make sorting easier.
+### Random HTML colors
 
-    sortAsc = (a, b) -> +a - +b
+    # d(['1','2','3','4','5','6','7','8','9','a','b','c','d','e','f']).repeat(6).sum()
 
-    sortDesc = (a, b) -> +b - +a
-
-Predicates.
-
-    isNumber = (n) -> typeof n is 'number'
-
-    isString = (s) -> typeof s is 'string'
-    
-    isFunction = (f) -> typeof f is 'function'
-
-    isArray = (a) -> a instanceof Array
-
-`val` is used to get the 'value' of an object, whatever it may be.
-
-    val = (obj) ->
-        if isFunction(obj)
-            return obj()
-        else if obj instanceof Die
-            return obj.roll()
-        else
-            return obj
